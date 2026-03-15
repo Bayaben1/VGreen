@@ -1,0 +1,110 @@
+<div class="signin-layout">
+
+  <!-- LEFT SIDE -->
+  <div class="left-side">
+    <div class="logo-container">
+      <img src="assets/icons/logoVgreen.svg" alt="logo" class="logo">
+    </div>
+
+    <div class="form-container">
+      <h1 class="form-title">Sign In</h1>
+      <p class="form-subtitle">Welcome Back! Please enter your details</p>
+
+      <div class="field">
+        <label for="email">Username or email</label>
+        <input
+          id="email"
+          type="text"
+          [(ngModel)]="email"
+          placeholder=""
+          class="input-field"
+        />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="password-wrapper">
+          <input
+            id="password"
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="password"
+            placeholder=""
+            class="input-field"
+          />
+          <span class="eye-icon" (click)="togglePassword()">
+            <img
+              [src]="showPassword ? 'assets/icons/eye.svg' : 'assets/icons/eye-off.svg'"
+              alt="toggle password"
+            >
+          </span>
+        </div>
+      </div>
+
+      <div class="forgot">
+        <a class="forgot-link">Forgot Password?</a>
+      </div>
+
+      <button class="signin-btn" (click)="signIn()" type="button">Sign In</button>
+
+      <div class="separator"><span></span></div>
+
+      <p class="register-text">
+        Dont have an account? <a class="register-link" routerLink="/register">Register</a>
+      </p>
+
+      <div class="language-toggle">
+        <span class="lang active-lang">ENGLISH</span> | <span class="lang">FRANÇAIS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="right-side">
+    <div class="right-content">
+      <h2 class="right-title">The carbon accounting platform that perfectly matches your needs</h2>
+      <p class="right-desc">
+        With VGREEN, we help businesses take control of their carbon emissions. Our advanced tools
+        allow you to measure your environmental impact, uncover opportunities for reduction, and
+        make data-driven decisions for a sustainable future. Join the movement for a greener tomorrow!
+      </p>
+
+      <div class="dashboard-preview">
+        <div class="chart-card">
+          <div class="donut-wrapper">
+            <svg viewBox="0 0 120 120" class="donut-svg">
+              <circle cx="60" cy="60" r="45" fill="none" stroke="#e0e0e0" stroke-width="12"/>
+              <circle cx="60" cy="60" r="45" fill="none" stroke="#07503e" stroke-width="12"
+                stroke-dasharray="170 113" stroke-dashoffset="0" stroke-linecap="round"/>
+              <circle cx="60" cy="60" r="45" fill="none" stroke="#5dbea3" stroke-width="12"
+                stroke-dasharray="70 213" stroke-dashoffset="-170" stroke-linecap="round"/>
+              <circle cx="60" cy="60" r="45" fill="none" stroke="#a8e6cf" stroke-width="12"
+                stroke-dasharray="43 240" stroke-dashoffset="-240" stroke-linecap="round"/>
+            </svg>
+            <div class="donut-label">
+              <span class="donut-value">200tCO2e</span>
+              <span class="donut-sub">Total Emissions</span>
+            </div>
+          </div>
+          <div class="scope-labels">
+            <span class="scope">— Scope 1<br><small>125 tCO2</small></span>
+            <span class="scope">— Scope 2<br><small>50 tCO2</small></span>
+            <span class="scope">— Scope 3<br><small>25 tCO2</small></span>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-header">
+            <span>Category</span><span>Emissions</span><span>t eq CO2</span>
+          </div>
+          <div class="table-row" *ngFor="let row of tableRows">
+            <span class="row-icon">⚡</span>
+            <span class="row-name">{{ row.name }}</span>
+            <span class="row-bar"><span class="bar-fill" [style.width]="row.bar"></span></span>
+            <span class="row-val">{{ row.val }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

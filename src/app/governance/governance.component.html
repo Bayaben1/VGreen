@@ -1,0 +1,100 @@
+<!-- TOP NAVBAR -->
+<div class="top-navbar">
+  <a>
+    <img src="assets/icons/logoVgreen.svg" alt="logo" class="logo">
+  </a>
+  <div class="right-actions">
+    <a class="nav-item">EN ▾</a>
+    <a class="nav-item">Login</a>
+    <button class="sbutton" type="button">Sign Up</button>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Maturity Assessment <span class="arrow">▲</span></div>
+
+      <div class="sidebar-sub-section">
+        <div class="sidebar-subtitle">
+          <img src="assets/icons/plant.svg" alt="" class="sidebar-icon"> Assessment <span class="arrow">▲</span>
+        </div>
+        <ul class="sidebar-links">
+          <li><a routerLink="/environnement" class="sidebar-link">Environmental</a></li>
+          <li><a routerLink="/social" class="sidebar-link">Social</a></li>
+          <li><a routerLink="/governance" class="sidebar-link sidebar-link-active">Governance</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-item">
+        <img src="assets/icons/plant.svg" alt="" class="sidebar-icon"> Results
+      </div>
+      <div class="sidebar-item">
+        <img src="assets/icons/plant.svg" alt="" class="sidebar-icon"> Roadmap
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Sustainability Analysis <span class="arrow">▲</span></div>
+      <ul class="sidebar-links">
+        <li><a class="sidebar-link">Company Overview</a></li>
+        <li><a class="sidebar-link">Topics and KPIs validation</a></li>
+        <li><a class="sidebar-link">Data Gathering</a></li>
+        <li><a class="sidebar-link">Dashboard <span class="arrow">▼</span></a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Carbon Footprint Calculator <span class="arrow">▼</span></div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="page-container">
+    <div class="questionnaire-container">
+      <div class="title-container">
+        <p class="form-title">Governance</p>
+        <div class="part-description">Select the answer that best suits your business</div>
+      </div>
+
+      <div class="questions-container">
+        <div *ngFor="let question of questions"
+             class="question-item"
+             [class.answered]="hasAnswer(question.id)">
+
+          <div class="question-header" (click)="toggleAccordion(question.id)">
+            <div class="question-number">{{ question.number }}</div>
+            <span class="separator">|</span>
+            <div class="question-text">{{ question.text }}</div>
+            <div class="arrow-down">{{ isOpen(question.id) ? '▲' : '▼' }}</div>
+          </div>
+
+          <ul *ngIf="isOpen(question.id)" class="answers">
+            <li *ngFor="let option of question.options"
+                class="answer-container"
+                [class.selected]="isSelected(question.id, option.value)"
+                (click)="selectOption(question.id, option.value)">
+              <span><strong>{{ option.label }}</strong> {{ option.text }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="custom-separator">
+    </div>
+
+    <div class="button-container-next">
+      <button
+        class="button-submit"
+        [class.active]="allQuestionsAnswered()"
+        [disabled]="!allQuestionsAnswered()"
+        (click)="submit()"
+        type="button">
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
